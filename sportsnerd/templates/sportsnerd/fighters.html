@@ -1,0 +1,14 @@
+{% extends "sportsnerd/layout.html" %}
+
+{% block title %}All Fighters{% endblock %}
+
+{% block body %}
+    {% for fighter in fighters %}
+        <div class="container my-3">
+            <strong><a href="{% url 'sportsnerd:fighter' fighter.FighterId %}" style="color:black">{{ fighter.FirstName }} {{ fighter.LastName }}</a></strong>
+            <div>{{ fighter.WeightClass }}</div>
+            <div>Wins: {{ fighter.Wins }} Losses: {{ fighter.Losses }}</div>
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock %}

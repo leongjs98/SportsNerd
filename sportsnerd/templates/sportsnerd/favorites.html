@@ -1,0 +1,16 @@
+{% extends "sportsnerd/layout.html" %}
+
+{% block title %}Favorites{% endblock %}
+
+{% block body %}
+    {% if message %}
+        <h1 class="container my-4">{{ message }}</h1>
+    {% endif %}
+    {% for favorite in favorites %}
+
+        <div class="container my-3">
+            <strong><a href="{% url 'sportsnerd:fighter' favorite.fighter.fighter_id %}" style="color:black">{{ favorite.fighter.name }}</a></strong>
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock %}

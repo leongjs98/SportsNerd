@@ -1,0 +1,24 @@
+{% extends "sportsnerd/layout.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <h3 class="container my-3">Welcome to SportsNerd, 
+        {% if user.is_authenticated %}
+            {{ user.username }}
+        {% else %}
+            random stranger!
+        {% endif %}
+    </h3>
+    {% if random_fighters %}
+        <h4 class="container my-3">Here's 10 random fighters for you.</h4>
+        <div class= "container my-3">
+            {% for fighter in random_fighters %}
+                <div class="container my-3">
+                    <strong><a href="{% url 'sportsnerd:fighter' fighter.fighter_id %}" style="color:black">{{ fighter.name }}</a></strong>
+                </div>
+                <hr>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

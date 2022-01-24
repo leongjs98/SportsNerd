@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}{% endblock %} • SportsNerd</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'sportsnerd/css/styles.css' %}" rel="stylesheet" type="text/css">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- For autocomplete suggestions in search -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
+        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css" />
+        {% block file %}{% endblock %}
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="{% url 'sportsnerd:index' %}">SportsNerd</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item my-2">
+                      <a class="nav-link" href="{% url 'sportsnerd:schedule' %}">Schedule</a>
+                    </li>
+                    <li class="nav-item my-2">
+                        <a class="nav-link" href="{% url 'sportsnerd:fighters' %}">Fighters</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item mr-3 my-2">
+                        <a class="nav-link" href="{% url 'sportsnerd:favorites' %}">Favorites</a>
+                    </li>
+                    {% endif %}
+                    <form class="form-inline my-2" action="{% url 'sportsnerd:fighter_search' %}" method="post">
+                        {% csrf_token %}
+                        <input class="form-control mr-sm-2" id="search-fighter-form" type="text" name="name-searched" placeholder="Search a fighter">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </form>
+                </ul>
+                <ul class="navbar-nav ml-auto my-2">
+                    {% if user.is_authenticated %}
+                        {% if user.is_superuser %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Update
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="nav-link" href="{% url 'sportsnerd:update_fighters' %}">Fighter Database</a>
+                                <a class="nav-link" href="{% url 'sportsnerd:update_leagues' %}">League Database</a>
+                            </div>
+                        </li>
+                        {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'sportsnerd:logout' %}">Log Out</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item my-2">
+                        <a class="nav-link" href="{% url 'sportsnerd:login' %}">Log In</a>
+                    </li>
+                    <li class="nav-item my-2">
+                        <a class="nav-link" href="{% url 'sportsnerd:register' %}">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+        {% block body %}{% endblock %}
+    </body>
+</html>

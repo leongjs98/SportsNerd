@@ -1,0 +1,15 @@
+:root {
+    --theme: #e3f2fd;
+}
+
+nav {
+    background-color: var(--theme);
+}
+
+thead {
+    background-color: var(--theme);
+}
+
+table {
+    table-layout: fixed;
+}

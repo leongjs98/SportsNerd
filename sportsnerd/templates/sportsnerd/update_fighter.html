@@ -1,0 +1,17 @@
+{% extends "sportsnerd/layout.html" %}
+
+{% block title %}Update Fighters{% endblock %}
+
+{% block body %}
+    {% if fighters_added %}
+        <h1 class="container my-4"> Fighter added: </h1>
+    {% else %}
+        <h1 class="container my-4"> No new fighters at the moment. </h1>
+    {% endif %}
+    {% for fighter in fighters_added %}
+        <div class="container my-3">
+            <strong><a href="{% url 'sportsnerd:fighter' fighter.FighterId %}" style="color:black">{{ fighter.FirstName }} {{ fighter.LastName }}</a></strong>
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock %}

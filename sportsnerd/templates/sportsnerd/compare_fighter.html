@@ -1,0 +1,262 @@
+{% extends "sportsnerd/layout.html" %}
+
+{% block title %}Fighter{% endblock %}
+
+{% load static %}
+{% block file %}
+    <script src="{% static 'sportsnerd/compare_fighter.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+    <h3 class="container my-3">Compare {{ fighter.FirstName }} {{ fighter.LastName }} with other fighter!</h3>
+    
+    <form class="container my-3" id="compare-fighter-form">
+        <input type="text" id="compare-fighter-search" placeholder="Search a fighter">
+        <input type="submit" value="Go" class="btn btn-primary">
+        <script>
+            $(function () {
+                var fightersList = [
+                    {% for fighter in fighters %}
+                    "{{ fighter.name }}",
+                    {% endfor %}
+            ];
+            $("#compare-fighter-search").autocomplete({
+                source: fightersList
+            });
+            });
+        </script>
+    </form>
+
+    <div class="container my-4">
+        <div class="row-justify-content-center">
+            <div class="col-auto">
+                <table class="table my-3">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-3 text-center table-primary" scope="col-sm">
+                                <strong class="container text-center fighter-1" id="fighter-name">
+                                    {{ fighter.FirstName }} {{ fighter.LastName }}
+                                </strong>
+                            </th>
+                            <th class="col-xs-3 text-center" scope="col-sm"></th>
+                            <th class="col-xs-3 text-center table-danger" scope="col-sm">
+                                <strong class="container text-center fighter-2" id="fighter-name">
+                                </strong>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="fighter-nickname">{{ fighter.Nickname }}</td>
+                            <th scope="row" class="col-xs-3 text-center">Nickname</th>
+                            <td class="col-xs-3 text-center fighter-2" id="fighter-nickname"></td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="weight-class">{{ fighter.WeightClass }}</td>
+                            <th scope="row" class="col-xs-3 text-center">Weight Class</th>
+                            <td class="col-xs-3 text-center fighter-2" id="weight-class"></td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="birth-date" data-value="{{ fighter.BirthDate }}"></td>
+                            <th scope="row" class="col-xs-3 text-center">Birth Date</th>
+                            <td class="col-xs-3 text-center fighter-2" id="birth-date" data-value="{{ fighter.BirthDate }}"></td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="age"></td>
+                            <th scope="row" class="col-xs-3 text-center">Age</th>
+                            <td class="col-xs-3 text-center fighter-2" id="age"></td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="height" data-value="{{ fighter.Height }}"></td>
+                            <th scope="row" class="col-xs-3 text-center">Height</th>
+                            <td class="col-xs-3 text-center fighter-2" id="height" data-value="{{ fighter.Height }}"></td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="weight" data-value="{{ fighter.Weight }}"></td>
+                            <th scope="row" class="col-xs-3 text-center">Weight</th>
+                            <td class="col-xs-3 text-center fighter-2" id="weight" data-value="{{ fighter.Weight }}"></td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="reach" data-value="{{ fighter.Reach }}"></td>
+                            <th scope="row" class="col-xs-3 text-center">Reach</th>
+                            <td class="col-xs-3 text-center fighter-2" id="reach" data-value="{{ fighter.Reach }}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <hr>
+        <div class="row-justify-content-center">
+            <div class="col-auto">
+                <table class="table table-bordered my-3" style="display: inline-table;">
+                    <thead>
+                        <tr>
+                            <th colspan="3" class="text-center">Records</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="wins">{{ fighter.Wins }}</td>
+                            <th scope="row" class="col-xs-3 text-center">Wins</th>
+                            <td class="col-xs-3 text-center fighter-2" id="wins"></td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="losses">{{ fighter.Losses }}</td>
+                            <th scope="row" class="col-xs-3 text-center">Losses</th>
+                            <td class="col-xs-3 text-center fighter-2" id="losses"></td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="draws">{{ fighter.Draws }}</td>
+                            <th scope="row" class="col-xs-3 text-center">Draws</th>
+                            <td class="col-xs-3 text-center fighter-2" id="draws"></td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="no-contests">{{ fighter.NoContests }}</td>
+                            <th scope="row" class="col-xs-3 text-center">No Contests</th>
+                            <td class="col-xs-3 text-center fighter-2" id="no-contests"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row-justify-content-center">
+            <div class="col-auto">
+                <table class="table table-bordered my-3">
+                    <thead>
+                        <tr>
+                            <th colspan="3" class="text-center">Title Fights</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="title-wins">{{ fighter.TitleWins }}</td>
+                            <th scope="row" class="col-xs-3 text-center">Title Wins</th>
+                            <td class="col-xs-3 text-center fighter-2" id="title-wins"></td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="title-losses">{{ fighter.TitleLosses }}</td>
+                            <th scope="row" class="col-xs-3 text-center">Title Losses</th>
+                            <td class="col-xs-3 text-center fighter-2" id="title-losses"></td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="title-draws">{{ fighter.TitleDraws }}</td>
+                            <th scope="row" class="col-xs-3 text-center">Title Draws</th>
+                            <td class="col-xs-3 text-center fighter-2" id="title-draws"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row-justify-content-center">
+            <div class="col-auto">
+                <table class="table table-bordered my-3" style="display: inline-table;">
+                    <thead>
+                        <tr>
+                            <th colspan="3" class="text-center">TKOs & Submissions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="tko">{{ fighter.TechnicalKnockouts }}</td>
+                            <th scope="row" class="col-xs-3 text-center">Technical Knockouts (TKO)</th>
+                            <td class="col-xs-3 text-center fighter-2" id="tko"></td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="tko-losses">{{ fighter.TechnicalKnockoutLosses }}</td>
+                            <th scope="row" class="col-xs-3 text-center">TKO Losses</th>
+                            <td class="col-xs-3 text-center fighter-2" id="tko-losses"></td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="sub">{{ fighter.Submissions }}</td>
+                            <th scope="row" class="col-xs-3 text-center">Submissions</th>
+                            <td class="col-xs-3 text-center fighter-2" id="sub"></td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="sub-losses">{{ fighter.SubmissionLosses }}</td>
+                            <th scope="row" class="col-xs-3 text-center">Submissions Losses</th>
+                            <td class="col-xs-3 text-center fighter-2" id="sub-losses"></td>
+                        </tr>
+                    </tbody>
+                </table>    
+            </div>
+        </div>
+        <hr>
+        <div class="row-justify-content-center">
+            <div class="col-auto">
+                <table class="table table-bordered my-3">
+                    <thead>
+                        <tr>
+                            <th colspan="3" class="text-center">Striking</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="sig-strike-acc">{{ fighter.CareerStats.SigStrikeAccuracy }}</td>
+                            <th scope="row" class="col-xs-3 text-center">Sig. Strike Accuracy</th>
+                            <td class="col-xs-3 text-center fighter-2" id="sig-strike-acc"></td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="sig-strike-per-min">{{ fighter.CareerStats.SigStrikesLandedPerMinute }}</td>
+                            <th scope="row" class="col-xs-3 text-center">Sig. Strike Landed Per Min</th>
+                            <td class="col-xs-3 text-center fighter-2" id="sig-strike-per-min"></td>
+                        </tr>
+                    </tbody>
+                </table>    
+            </div>
+        </div>
+        <div class="row-justify-content-center">
+            <div class="col-auto">
+                <table class="table table-bordered my-3">
+                    <thead>
+                        <tr>
+                            <th colspan="3" class="text-center">Grappling</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="sub-avg">{{ fighter.CareerStats.SubmissionAverage }}</td>
+                            <th scope="row" class="col-xs-3 text-center">Submission Avg.</th>
+                            <td class="col-xs-3 text-center fighter-2" id="sub-avg"></td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="td-avg">{{ fighter.CareerStats.TakedownAverage }}</td>
+                            <th scope="row" class="col-xs-3 text-center">Takedown Avg.</th>
+                            <td class="col-xs-3 text-center fighter-2" id="td-avg"></td>
+                        </tr>
+                    </tbody>
+                </table>    
+            </div>
+        </div>
+        <hr>
+        <div class="row-justify-content-center">
+            <div class="col-auto">
+                <table class="table table-bordered my-3">
+                    <thead>
+                        <tr>
+                            <th colspan="3" class="text-center">Finishes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="decision-percent">{{ fighter.CareerStats.DecisionPercentage }}</td>
+                            <th scope="row" class="col-xs-3 text-center">Decision Percentage</th>
+                            <td class="col-xs-3 text-center fighter-2" id="decision-percent"></td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="ko-percent">{{ fighter.CareerStats.KnockoutPercentage }}</td>
+                            <th scope="row" class="col-xs-3 text-center">KO Percentage</th>
+                            <td class="col-xs-3 text-center fighter-2" id="ko-percent"></td>
+                        </tr>
+                        <tr>
+                            <td class="col-xs-3 text-center fighter-1" id="tko-percent">{{ fighter.CareerStats.TechnicalKnockoutPercentage }}</td>
+                            <th scope="row" class="col-xs-3 text-center">TKO Percentage</th>
+                            <td class="col-xs-3 text-center fighter-2" id="tko-percent"></td>
+                        </tr>
+                    </tbody>
+                </table>    
+            </div>
+        </div>
+        <br>
+        <br>
+{% endblock %}

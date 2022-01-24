@@ -1,0 +1,154 @@
+{% extends "sportsnerd/layout.html" %}
+
+{% block body %}
+    <br>
+    {% if main_card %}
+        <h2 class="container">Main Card</h2>
+        {% for fight in main_card %}
+        <div class="container my-3">
+            <div class="container my-3">
+                Weight Class: {{ fight.WeightClass }}
+            </div>
+            <table class="table my-3">
+                <thead>
+                    <tr>
+                        <th class="text-center table-primary" scope="col-sm">
+                            <strong>
+                                <a href="{% url 'sportsnerd:fighter' fight.Fighters.0.FighterId %}" style="color:black">{{ fight.Fighters.0.FirstName }} {{ fight.Fighters.0.LastName }}</a>
+                            </strong>
+                        </th>
+                        <th class="text-center" scope="col-sm">Pre-Fight Stats</th>
+                        <th class="text-center table-danger" scope="col-sm">
+                            <strong>
+                                <a href="{% url 'sportsnerd:fighter' fight.Fighters.1.FighterId %}" style="color:black">{{ fight.Fighters.1.FirstName }} {{ fight.Fighters.1.LastName }}</a>
+                            </strong>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">{{ fight.Fighters.0.PreFightWins }}</td>
+                        <td class="text-center">Wins</td>
+                        <td class="text-center">{{ fight.Fighters.1.PreFightWins }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">{{ fight.Fighters.0.PreFightLosses }}</td>
+                        <td class="text-center">Losses</td>
+                        <td class="text-center">{{ fight.Fighters.1.PreFightLosses }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">{{ fight.Fighters.0.PreFightDraws }}</td>
+                        <td class="text-center">Draws</td>
+                        <td class="text-center">{{ fight.Fighters.1.PreFightDraws }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">{{ fight.Fighters.0.PreFightNoContests }}</td>
+                        <td class="text-center">No Contests</td>
+                        <td class="text-center">{{ fight.Fighters.1.PreFightNoContests }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">{{ fight.Fighters.0.Moneyline }}</td>
+                        <td class="text-center">Money Line</td>
+                        <td class="text-center">{{ fight.Fighters.1.Moneyline }}</td>
+                    </tr>
+                    <tr>
+                        {% if fight.Fighters.0.Winner == True %}
+                            <td class="text-center table-success">
+                                Winner
+                            </td>
+                        {% else %}
+                            <td class="text-center table-active">
+                            </td>
+                        {% endif %}
+                        <td class="text-center">Results</td>
+                        {% if fight.Fighters.1.Winner == True %}
+                            <td class="text-center table-success">
+                                Winner
+                            </td>
+                        {% else %}
+                            <td class="text-center table-active">
+                            </td>
+                        {% endif %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+        {% endfor %}
+    {% endif %}
+
+    {% if prelims %}
+        <h2 class="container">Prelims</h2>
+        {% for fight in prelims %}
+        <div class="container">
+            <div class="container my-3">
+                Weight Class: {{ fight.WeightClass }}
+            </div>
+            <table class="table my-3">
+                <thead>
+                    <tr>
+                        <th class="text-center table-primary" scope="col-sm">
+                            <strong>
+                                <a href="{% url 'sportsnerd:fighter' fight.Fighters.0.FighterId %}" style="color:black">{{ fight.Fighters.0.FirstName }} {{ fight.Fighters.0.LastName }}</a>
+                            </strong>
+                        </th>
+                        <th class="text-center" scope="col-sm">Pre-Fight Stats</th>
+                        <th class="text-center table-danger" scope="col-sm">
+                            <strong>
+                                <a href="{% url 'sportsnerd:fighter' fight.Fighters.1.FighterId %}" style="color:black">{{ fight.Fighters.1.FirstName }} {{ fight.Fighters.1.LastName }}</a>
+                            </strong>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">{{ fight.Fighters.0.PreFightWins }}</td>
+                        <td class="text-center">Wins</td>
+                        <td class="text-center">{{ fight.Fighters.1.PreFightWins }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">{{ fight.Fighters.0.PreFightLosses }}</td>
+                        <td class="text-center">Losses</td>
+                        <td class="text-center">{{ fight.Fighters.1.PreFightLosses }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">{{ fight.Fighters.0.PreFightDraws }}</td>
+                        <td class="text-center">Draws</td>
+                        <td class="text-center">{{ fight.Fighters.1.PreFightDraws }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">{{ fight.Fighters.0.PreFightNoContests }}</td>
+                        <td class="text-center">No Contests</td>
+                        <td class="text-center">{{ fight.Fighters.1.PreFightNoContests }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">{{ fight.Fighters.0.Moneyline }}</td>
+                        <td class="text-center">Money Line</td>
+                        <td class="text-center">{{ fight.Fighters.1.Moneyline }}</td>
+                    </tr>
+                    <tr>
+                        {% if fight.Fighters.0.Winner == True %}
+                            <td class="text-center table-success">
+                                Winner
+                            </td>
+                        {% else %}
+                            <td class="text-center table-active">
+                            </td>
+                        {% endif %}
+                        <td class="text-center">Results</td>
+                        {% if fight.Fighters.1.Winner == True %}
+                            <td class="text-center table-success">
+                                Winner
+                            </td>
+                        {% else %}
+                            <td class="text-center table-active">
+                            </td>
+                        {% endif %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

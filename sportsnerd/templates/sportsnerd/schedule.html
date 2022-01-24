@@ -1,0 +1,61 @@
+{% extends "sportsnerd/layout.html" %}
+
+{% block title %}Schedule{% endblock %}
+
+{% block body %}
+    <h3 class="container my-3">Look up schedules of different leagues!</h1>
+    <h5 class="container my-3">Only UFC is available at the moment.</h2>
+    
+    <div class="container my-3">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <form class="text-center" id="schedule-form" action="{% url 'sportsnerd:schedule' %}" method="post">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="leagueSelect">League</label>
+                            </div>
+                            <select class="league-select" id="leagueSelect" name="league">
+                                <option selected>Choose...</option>
+                                {% for league in league_list %}
+                                    <option value="{{ league.key }}">{{ league }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend" style="display: inline-block;">
+                                <label class="input-group-text" for="seasonSelect">Year</label>
+                            </div>
+                            <select class="season-select" id="seasonSelect" name="season">
+                                <option selected>Choose...</option>
+                                {% for year in year_list %}
+                                    <option value="{{ year }}">{{ year }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <input class="col btn btn-primary" type="submit" value="Search">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        {% if message %}
+            <div class="alert alert-warning" role="alert">
+                {{ message }}
+            </div>
+        {% endif %}
+        {% load format_date %}
+        {% for event in events %}
+            <div class="media position-relative">
+                <div class="media-body">
+                <h5 class="mt-0">{{ event.Name }}</h5>
+                <p>{{ event.Day|format_date }}</p>
+                <a href="{% url 'sportsnerd:event' event.EventId %}" class="stretched-link">Details</a>
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock %}

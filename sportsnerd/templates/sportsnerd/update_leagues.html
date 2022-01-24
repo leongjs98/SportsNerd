@@ -1,0 +1,17 @@
+{% extends "sportsnerd/layout.html" %}
+
+{% block title %}Update Leagues{% endblock %}
+
+{% block body %}
+    {% if leagues_added %}
+        <h1 class="container my-4"> Leagues added: </h1>
+    {% else %}
+        <h1 class="container my-4"> No new leagues at the moment. </h1>
+    {% endif %}
+    {% for league in leagues_added %}
+        <div class="container my-3">
+            <strong>{{ league }}</strong>
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock %}
