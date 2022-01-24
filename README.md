@@ -138,7 +138,7 @@ Simple styling to make the application looks nicer.
 
 
 ## YouTube Demo
-[Here](#https://youtu.be/iIZUdVlZN5I) is a listed YouTube Demo video.
+[Here](https://youtu.be/iIZUdVlZN5I) is a listed YouTube Demo video.
 
 
 ### Finally
