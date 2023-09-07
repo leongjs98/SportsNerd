@@ -1,3 +1,5 @@
+This is the capstone project I made for my CS50 course.
+
 # Distinctiveness and Complexity
 
 * SportsNerd is distinct from other projects in this course because Sportsnerd is not a social media like `Network`; is not a auction site like `Commerce`; is not a emails site like `Email`; is not a encyclopedia site like `Wiki`; is not a front-end for Google Searches like `Search`. It is also not like the previous Capstone Project, a Pizza ordering site named `Pizza`. SportsNerd allow users to search for details of past, current and upcoming MMA events and different fighters from different organization. It also allow user to add manage different fighters in their favorite list and compare the stats of different fighters. The events and fighters data are acquired from [sportsdata.io API](#https://sportsdata.io/mma-ufc-api).
